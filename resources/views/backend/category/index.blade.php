@@ -10,55 +10,29 @@
                 <thead>
                 <tr>
                     <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
-                    <th>Column name</th>
-                    <th>Column name</th>
-                    <th>Column name</th>
-                    <th>Column name</th>
+                    <th>{{__('backend.name')}}</th>
+                    <th>{{__('backend.status')}}</th>
+                    <th>{{__('backend.parent')}}</th>
+                    <th class="taskOptions">{{__('backend.action')}}</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td><input type="checkbox" /></td>
-                    <td>Row 1</td>
-                    <td>Row 2</td>
-                    <td>Row 3</td>
-                    <td>Row 4</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" /></td>
-                    <td>Row 1</td>
-                    <td>Row 2</td>
-                    <td>Row 3</td>
-                    <td>Row 4</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" /></td>
-                    <td>Row 1</td>
-                    <td>Row 2</td>
-                    <td>Row 3</td>
-                    <td>Row 4</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" /></td>
-                    <td>Row 1</td>
-                    <td>Row 2</td>
-                    <td>Row 3</td>
-                    <td>Row 4</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" /></td>
-                    <td>Row 1</td>
-                    <td>Row 2</td>
-                    <td>Row 3</td>
-                    <td>Row 4</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" /></td>
-                    <td>Row 1</td>
-                    <td>Row 2</td>
-                    <td>Row 3</td>
-                    <td>Row 4</td>
-                </tr>
+                @foreach($categories as $item)
+                    <tr>
+                        <td><input type="checkbox" /></td>
+                        <td>{{$item->name}}</td>
+                        <td>Row 2</td>
+                        <td>Row 3</td>
+                        <td class="taskOptions">
+                            <a href="#" class="tip-top" data-original-title="Update">
+                                <i class="icon-wrench"></i>
+                            </a>
+                            <a href="#" class="tip-top" data-original-title="Delete">
+                                <i class="icon-remove"></i>
+                            </a>
+                        </td>
+                    </tr>
+                @endforeach
                 </tbody>
                 </table>
             </div>

@@ -8,58 +8,31 @@
                 <thead>
                 <tr>
                     <th><input type="checkbox" id="title-table-checkbox" name="title-table-checkbox" /></th>
-                    <th>Column name</th>
-                    <th>Column name</th>
-                    <th>Column name</th>
-                    <th>Column name</th>
+                    <th><?php echo e(__('backend.name')); ?></th>
+                    <th><?php echo e(__('backend.status')); ?></th>
+                    <th><?php echo e(__('backend.parent')); ?></th>
+                    <th class="taskOptions"><?php echo e(__('backend.action')); ?></th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td><input type="checkbox" /></td>
-                    <td>Row 1</td>
-                    <td>Row 2</td>
-                    <td>Row 3</td>
-                    <td>Row 4</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" /></td>
-                    <td>Row 1</td>
-                    <td>Row 2</td>
-                    <td>Row 3</td>
-                    <td>Row 4</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" /></td>
-                    <td>Row 1</td>
-                    <td>Row 2</td>
-                    <td>Row 3</td>
-                    <td>Row 4</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" /></td>
-                    <td>Row 1</td>
-                    <td>Row 2</td>
-                    <td>Row 3</td>
-                    <td>Row 4</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" /></td>
-                    <td>Row 1</td>
-                    <td>Row 2</td>
-                    <td>Row 3</td>
-                    <td>Row 4</td>
-                </tr>
-                <tr>
-                    <td><input type="checkbox" /></td>
-                    <td>Row 1</td>
-                    <td>Row 2</td>
-                    <td>Row 3</td>
-                    <td>Row 4</td>
-                </tr>
+                <?php $__currentLoopData = $categories; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $item): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <tr>
+                        <td><input type="checkbox" /></td>
+                        <td><?php echo e($item->name); ?></td>
+                        <td>Row 2</td>
+                        <td>Row 3</td>
+                        <td class="taskOptions">
+                            <a href="#" class="tip-top" data-original-title="Update">
+                                <i class="icon-wrench"></i>
+                            </a>
+                            <a href="#" class="tip-top" data-original-title="Delete">
+                                <i class="icon-remove"></i>
+                            </a>
+                        </td>
+                    </tr>
+                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tbody>
                 </table>
-                
             </div>
         </div>
         <div class="pagination">

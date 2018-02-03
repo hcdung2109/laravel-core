@@ -24,6 +24,9 @@ return  [
     'deactive' => 'Deactive',
     'special' => 'Special',
     'info_article' => 'Information Article',
+    'status' => 'Status',
+    'action' => 'Action',
+    'parent' => 'Parent',
 
     // Error
     'required' => 'Error ! Not empty',
