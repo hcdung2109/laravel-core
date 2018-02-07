@@ -33,6 +33,8 @@ Route::group(['prefix' => 'backend'], function (){
     // Group Article
     Route::resource('article','Backend\ArticleController');
 
+    // Route User
+    Route::resource('user','Backend\UserController');
 
 });
 

@@ -9,7 +9,7 @@
                 <div class="control-group">
                     <label class="control-label">Select <?php echo e(__('backend.category')); ?></label>
                     <div class="controls ">
-                        <select name="category_id">
+                        <select name="category_id" class="span11">
                             <option>First option</option>
                             <option>Second option</option>
                             <option>Third option</option>

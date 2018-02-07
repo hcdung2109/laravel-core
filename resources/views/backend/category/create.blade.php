@@ -1,68 +1,117 @@
 @extends('backend.layouts.app')
 
 @section('content')
-    <div class="row-fluid">
+    <section id="widget-grid" class="">
 
-        <!-- Session message -->
-        @if(session('msg'))
-            <div class="alert alert-error">
-                <button class="close" data-dismiss="alert">×</button>
-                <strong>{{session('msg')}}</strong>
-            </div>
-        @endif
+        <!-- START ROW -->
 
-        <div class="widget-box">
-            <div class="widget-title"> <span class="icon"> <i class="icon-align-justify"></i> </span>
-                <h5>{{ __('backend.info_category') }}</h5>
-            </div>
-            <div class="widget-content nopadding">
-                <form class="form-horizontal" method="POST" action="{{route('category.store')}}">
-                    {{csrf_field()}}
-                    <div class="control-group">
-                        <label class="control-label">{{ __('backend.parent_id') }}</label>
-                        <div class="controls ">
-                            <select name="parent_id" class="span11">
-                                <option value="0">NO.</option>
-                                <option>Second option</option>
-                                <option>Third option</option>
-                                <option>Fourth option</option>
-                                <option>Fifth option</option>
-                                <option>Sixth option</option>
-                                <option>Seventh option</option>
-                                <option>Eighth option</option>
-                            </select>
+        <div class="row">
+
+            <!-- NEW COL START -->
+            <article class="col-sm-12 col-md-12 col-lg-12">
+
+                <!-- Widget ID (each widget will need unique ID)-->
+                <div class="jarviswidget" id="wid-id-1" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-custombutton="false">
+                    <header>
+                        <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+                        <h2>{{__('backend.create_new')}}</h2>
+
+                    </header>
+
+                    <!-- widget div-->
+                    <div>
+
+                        <!-- widget edit box -->
+                        <div class="jarviswidget-editbox">
+                            <!-- This area used as dropdown edit box -->
+
                         </div>
-                    </div>
-                    <div class="control-group">
-                        <label class="control-label">{{__('backend.name')}}</label>
-                        <div class="controls">
-                            <input type="text" name="name" class="span11">
-                            @if ($errors->has('name'))
-                                <span class="help-inline block txt-red">{{__('backend.required')}}</span>
-                            @endif
-                        </div>
-                    </div>
+                        <!-- end widget edit box -->
 
-                    <div class="control-group">
-                        <label class="control-label">{{__('backend.status')}}</label>
-                        <div class="controls">
-                            <label >
-                                <input type="radio" name="status" checked value="1"/>
-                                {{__('backend.active')}}</label>
-                            <label>
-                                <input type="radio" name="status" value="0"/>
-                                {{__('backend.deactive')}}</label>
-                            <label>
-                                <input type="radio" name="status" value="2"/>
-                                {{__('backend.special')}}</label>
-                        </div>
-                    </div>
+                        <!-- widget content -->
+                        <div class="widget-body no-padding">
 
-                    <div class="form-actions" style="border-top: 1px solid #e5e5e5 !important;">
-                        <button type="submit" class="btn btn-success">{{__('backend.create')}}</button>
+                            <form class="smart-form" method="POST" action="{{route('category.store')}}">
+                                <fieldset>
+
+                                    <section>
+                                        <label class="label">Select {{__('backend.parent')}}</label>
+                                        <label class="select">
+                                            <select>
+                                                <option value="0">NO.</option>
+                                                @foreach($allCategory as $category)
+                                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                                    @foreach($category->children as $child)
+                                                        <option value="{{$child->id}}">--- {{$child->name}}</option>
+                                                    @endforeach
+                                                @endforeach
+                                            </select> <i></i> </label>
+                                    </section>
+
+                                </fieldset>
+
+                                <fieldset>
+                                    <section>
+                                        <label class="label">{{__('backend.name')}}</label>
+                                        <label class="input">
+                                            <input type="text" maxlength="10" name="name">
+                                        </label>
+                                        <div class="note">
+                                            @if ($errors->has('name'))
+                                                <span class="help-inline block txt-red">{{__('backend.required')}}</span>
+                                            @endif
+                                        </div>
+                                    </section>
+
+                                    <section>
+                                        <label class="label">{{__('backend.status')}}</label>
+                                        <div class="inline-group">
+                                            <label class="radio">
+                                                <input type="radio" name="radio-inline" checked="checked">
+                                                <i></i>{{__('backend.active')}}</label>
+                                            <label class="radio">
+                                                <input type="radio" name="radio-inline">
+                                                <i></i>{{__('backend.deactive')}}</label>
+                                        </div>
+                                    </section>
+
+                                    <section>
+                                        <label class="label">{{__('backend.to_top')}}</label>
+                                        <div class="inline-group">
+                                            <label class="radio">
+                                                <input type="radio" name="to_top" checked="checked">
+                                                <i></i>{{__('backend.no')}}</label>
+                                            <label class="radio">
+                                                <input type="radio" name="to_top">
+                                                <i></i>{{__('backend.yes')}}</label>
+                                        </div>
+                                        <div class="note">
+                                            <strong>Maxlength</strong> is automatically added via the "maxlength='#'" attribute
+                                        </div>
+
+                                    </section>
+                                </fieldset>
+
+                                <footer>
+                                    <button type="submit" class="btn btn-primary">{{__('backend.create')}}</button>
+                                    <button type="button" class="btn btn-default" onclick="window.history.back();">{{__('backend.back')}}</button>
+                                </footer>
+                            </form>
+
+                        </div>
+                        <!-- end widget content -->
+
                     </div>
-                </form>
-            </div>
+                    <!-- end widget div -->
+
+                </div>
+                <!-- end widget -->
+
+            </article>
+            <!-- END COL -->
         </div>
-    </div>
+
+        <!-- END ROW -->
+
+    </section>
 @endsection

@@ -15,11 +15,12 @@ class Category extends Model
      * @var array
      */
     protected $attributes =  [
-        'sort' => 0,
-        'parent_id' => 0
+        'parent_id' => 0,
+        'show_on_top' => 0
     ];
+
     protected $fillable = [
-        'name', 'parent_id', 'status', 'sort', 'slug'
+        'name', 'parent_id', 'status', 'to_top', 'slug'
     ];
 
     protected static function boot()
@@ -49,6 +50,16 @@ class Category extends Model
     public function article()
     {
         return $this->hasMany('App\Models\Article');
+    }
+
+    public function children()
+    {
+        return $this->hasMany("App\Models\Category","parent_id","id");
+    }
+
+    public function parent()
+    {
+        return $this->belongsTo("App\Models\Category","parent_id","id");
     }
 
 }

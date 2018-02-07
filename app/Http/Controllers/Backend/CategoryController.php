@@ -5,9 +5,16 @@ namespace App\Http\Controllers\Backend;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Routing\Route;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $allCategory = Category::all();
+        view()->share(compact('allCategory'));
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -15,7 +22,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::orderBy('id','desc')->get();
+        $categories = Category::with('parent')->latest()->paginate();
 
         return view('backend.category.index',compact('categories'));
     }
@@ -62,35 +69,35 @@ class CategoryController extends Controller
 
     /**
      * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
      */
-    public function edit($id)
+    public function edit(Category $category)
     {
-        //
+        return view('backend.category.edit',compact('category'));
     }
+
 
     /**
      * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Request $request
+     * @param Category $category
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        //
+        $category->update($request->all());
+        return redirect()->route('category.edit',$category)->with('msgSuccess', __('backend.updated'));
     }
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * @param Category $category
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy(Category $category)
     {
-        //
+        Category::findOrFail($category)->delete();
+        //return response()->json($category);
     }
 }
